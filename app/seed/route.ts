@@ -103,12 +103,15 @@ async function seedRevenue() {
 
 export async function GET() {
   try {
+    console.log('Seeding başlıyor...');
+
     await client.sql`BEGIN`;
     await seedUsers();
     await seedCustomers();
     await seedInvoices();
     await seedRevenue();
     await client.sql`COMMIT`;
+    console.log('Seeding başarılı!');
 
     return Response.json({ message: 'Database seeded successfully' });
   } catch (error) {
